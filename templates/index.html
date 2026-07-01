@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Diabetes Prediction</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #fff; color: #333; }
+        .container { max-width: 800px; margin: auto; }
+        h2 { text-align: left; margin-bottom: 20px; font-size: 28px; font-weight: bold; }
+        .result { background-color: #e2f0d9; color: #385723; padding: 12px; margin-bottom: 20px; font-weight: bold; border-left: 5px solid #a9d08e; font-size: 16px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 14px; color: #555; }
+        input, select { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px 30px; margin-top: 15px; }
+        button { background-color: #f3f3f3; border: 1px solid #ababab; padding: 8px 24px; cursor: pointer; float: right; margin-top: 20px; border-radius: 4px; font-size: 14px; }
+        button:hover { background-color: #eaeaea; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Diabetes Prediction</h2>
+        
+        {% if prediction %}
+            <div class="result">
+                Hasil prediksi: {{ prediction }}
+            </div>
+        {% endif %}
+
+        <form action="/predict" method="POST">
+            <div class="form-group">
+                <label for="model">Model</label>
+                <select name="model" id="model">
+                    {% for m in model_names %}
+                        <option value="{{ m }}">{{ m }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="grid">
+                <div class="form-group">
+                    <label for="Pregnancies">Pregnancies</label>
+                    <input type="number" step="any" name="Pregnancies" id="Pregnancies" required>
+                </div>
+                <div class="form-group">
+                    <label for="Glucose">Glucose</label>
+                    <input type="number" step="any" name="Glucose" id="Glucose" required>
+                </div>
+                <div class="form-group">
+                    <label for="BloodPressure">BloodPressure</label>
+                    <input type="number" step="any" name="BloodPressure" id="BloodPressure" required>
+                </div>
+                <div class="form-group">
+                    <label for="SkinThickness">SkinThickness</label>
+                    <input type="number" step="any" name="SkinThickness" id="SkinThickness" required>
+                </div>
+                <div class="form-group">
+                    <label for="Insulin">Insulin</label>
+                    <input type="number" step="any" name="Insulin" id="Insulin" required>
+                </div>
+                <div class="form-group">
+                    <label for="BMI">BMI</label>
+                    <input type="number" step="any" name="BMI" id="BMI" required>
+                </div>
+                <div class="form-group">
+                    <label for="DiabetesPedigreeFunction">DiabetesPedigreeFunction</label>
+                    <input type="number" step="any" name="DiabetesPedigreeFunction" id="DiabetesPedigreeFunction" required>
+                </div>
+                <div class="form-group">
+                    <label for="Age">Age</label>
+                    <input type="number" step="any" name="Age" id="Age" required>
+                </div>
+            </div>
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+</body>
+</html>
